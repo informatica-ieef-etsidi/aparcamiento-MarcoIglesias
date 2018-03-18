@@ -1,19 +1,24 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include <time.h>
-
+#include<string.h>
 void main() {
 
 	system("color A5");
 
 	int i = 1, a = 0, b = 0; // a es una plaza y b otra
-	char opcion, matricula1[8] , matricula2[8] , opcion2;
-	while (i = 1) {
+	int orden1, orden2, reservar;
+	char opcion, matricula1[8] , matricula2[8] , opcion2,matriculaduda[8];
+	while (i == 1) {
 		//Partimos de las dos plazas libres, si hay dos libres se asigna primero la a por comodidad
+
 		printf("Selecione una de estas opciones:\n");
 		printf("R - Reservar plaza.\n");
 		printf("A - Abandonar plaza.\n");
 		printf("E - Estado del aparcamiento.\n");
+		printf("B - Buscar vehiculo por matricula.\n");
+		printf("S - Salir del programa.\n");
+
 		scanf_s("%c", &opcion);
 		getchar();
 		system("cls");
@@ -23,7 +28,7 @@ void main() {
 		case'r':
 		case 'R': // opcion de reservar
 		
-
+			
 			if (a == 0 && b == 1) {
 				printf("La plaza A esta libre, introduzca su matricula.\n");
 				a = 1;
@@ -47,6 +52,11 @@ void main() {
 				b = 1;
 				printf("Introduzca su matricula.\n");
 				scanf_s("%s", matricula2, 8);
+				reservar = strcmp(matricula1, matricula2);
+				if (reservar == 0) {
+					b = 0;
+					printf("Esa matricula ya esta en uso.\n");
+				}
 				getchar();
 				system("PAUSE");
 				system("cls");
@@ -137,6 +147,30 @@ void main() {
 			}
 			break;
 
+		case'b':
+		case'B'://opcion buscar matricula
+			printf("Cual es su matricula.\n");
+			scanf_s("%s", matriculaduda, 8);
+			getchar();
+			orden1=strcmp(matriculaduda, matricula1);
+			orden2 = strcmp(matriculaduda, matricula2);
+			if (orden1 == 0) {
+				printf("Ese coche esta en la plaza 1.\n");
+			}
+			else if (orden2 == 0) {
+				printf("Ese coche esta en la plaza 2.\n");
+			}
+			else {
+				printf("Ese coche no esta en el parking.\n");
+			}
+			system("pause");
+			system("cls");
+			break;
+
+		case 's':
+		case 'S':
+			i = 0;
+			break;
 		default:  // si no pone ninunga opcio valida
 			printf("Te has equivocado de opcion\n");
 			system("pause");
